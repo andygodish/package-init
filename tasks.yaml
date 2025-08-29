@@ -1,0 +1,61 @@
+includes: []
+
+variables:
+  - name: REGISTRY
+    description: "Remote OCI registry for Zarf init package"
+    default: "ghcr.io/zarf-dev/packages"
+  - name: PACKAGE_NAME
+    default: "init"
+  - name: PACKAGE_VERSION
+    description: "Version of the UDS K3d package"
+    default: "v0.60.0"
+  - name: ARCHITECTURE
+    description: "System architecture (amd64 or arm64)"
+    default: ""
+  - name: CONFIG_FILE
+    description: "Path to the zarf config file"
+    default: "zarf-config.toml"
+
+tasks:
+  - name: pull-init-package
+    description: "Pull Zarf init package from OCI registry"
+    actions:
+      - description: "Pull Zarf init package from OCI registry"
+        cmd: |
+          echo "Pulling Zarf init package ${K3D_PACKAGE_NAME}:${K3D_PACKAGE_VERSION} from ${K3D_REGISTRY}"
+          
+          ARCH_FLAG=""
+          if [ -n "${ARCHITECTURE}" ]; then
+            ARCH_FLAG="-a ${ARCHITECTURE}"
+            echo "Using specified architecture: ${ARCHITECTURE}"
+          else
+            echo "Using auto-detected architecture"
+          fi
+          
+          uds zarf package pull ${ARCH_FLAG} oci://${REGISTRY}/${PACKAGE_NAME}:${PACKAGE_VERSION}
+        env:
+          - ZARF_LOG_LEVEL=info
+
+  - name: deploy-init-dev
+    description: "Deploy K3d cluster with development settings"
+    actions:
+      - description: "Deploy K3d cluster with root zarf-config.toml"
+        cmd: |
+          ZARF_CONFIG="$CONFIG_FILE" uds zarf package deploy zarf-init-*-${PACKAGE_VERSION}.tar.zst \
+            --confirm
+
+  - name: init-dev-setup
+    description: "Complete K3d dev environment setup (pull + deploy)"
+    actions:
+      - task: pull-init-package
+      - task: deploy-init-dev
+
+  - name: clean-init-packages
+    description: "Remove local UDS K3d package files"
+    actions:
+      - description: "Clean up local K3d package files"
+        cmd: |
+          echo "Cleaning up local UDS K3d package files"
+          rm -f zarf-init*.tar.zst
+          echo "Package files removed"
+

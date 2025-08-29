@@ -1,0 +1,13 @@
+log_format = 'console'
+log_level = 'info'
+
+[package]
+oci_concurrency = 6
+
+[package.deploy]
+retries = 3
+timeout = 900000000000
+components = 'zarf-injector,zarf-seed-registry,zarf-registry,zarf-agent,git-server'
+
+[package.deploy.set]
+REGISTRY_PVC_SIZE = '30Gi'
