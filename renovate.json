@@ -6,7 +6,7 @@
       "customType": "regex",
       "fileMatch": ["\\.ya?ml$"],
       "matchStrings": [
-        "- name: PACKAGE_VERSION\\s*\\n\\s*description: \"Version of the Zarf init package\"\\s*\\n\\s*default: \"(?<currentValue>[^\"]+)\""
+        "- name: PACKAGE_VERSION\\s*\\n\\s*description: \"Version of the Zarf Init package\"\\s*\\n\\s*default: \"(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "zarf-dev/zarf",
@@ -15,7 +15,7 @@
   ],
   "packageRules": [
     {
-      "matchManagers": ["regex"],
+      "matchManagers": ["custom.regex"],
       "matchPackageNames": ["zarf-dev/zarf"],
       "groupName": "Zarf Init Package",
       "semanticCommitType": "deps",
