@@ -7,7 +7,7 @@ variables:
   - name: PACKAGE_NAME
     default: "init"
   - name: PACKAGE_VERSION
-    description: "Version of the UDS K3d package"
+    description: "Version of the Zarf Init package"
     default: "v0.60.0"
   - name: ARCHITECTURE
     description: "System architecture (amd64 or arm64)"
