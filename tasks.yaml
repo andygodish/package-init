@@ -22,7 +22,7 @@ tasks:
     actions:
       - description: "Pull Zarf init package from OCI registry"
         cmd: |
-          echo "Pulling Zarf init package ${K3D_PACKAGE_NAME}:${K3D_PACKAGE_VERSION} from ${K3D_REGISTRY}"
+          echo "Pulling Zarf init package ${PACKAGE_NAME}:${PACKAGE_VERSION} from ${REGISTRY}"
           
           ARCH_FLAG=""
           if [ -n "${ARCHITECTURE}" ]; then
@@ -37,9 +37,9 @@ tasks:
           - ZARF_LOG_LEVEL=info
 
   - name: deploy-init-dev
-    description: "Deploy K3d cluster with development settings"
+    description: "Deploy Zarf Init package"
     actions:
-      - description: "Deploy K3d cluster with root zarf-config.toml"
+      - description: "Deploy Zarf Inint with defined zarf-config.toml"
         cmd: |
           ZARF_CONFIG="$CONFIG_FILE" uds zarf package deploy zarf-init-*-${PACKAGE_VERSION}.tar.zst \
             --confirm
@@ -51,11 +51,11 @@ tasks:
       - task: deploy-init-dev
 
   - name: clean-init-packages
-    description: "Remove local UDS K3d package files"
+    description: "Remove local Zarf package files"
     actions:
-      - description: "Clean up local K3d package files"
+      - description: "Clean up local Zarf package files"
         cmd: |
-          echo "Cleaning up local UDS K3d package files"
+          echo "Cleaning up local UDS Zarf package files"
           rm -f zarf-init*.tar.zst
           echo "Package files removed"
 
