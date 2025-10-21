@@ -50,6 +50,7 @@ kubectl get pv -o yaml | grep hostPath -A 1
 ```
 
 ### 3. Clear and restore data
+
 ```bash
 docker cp /tmp/gitea-backup-*.tar.gz k3d-uds-server-0:/tmp/
 
