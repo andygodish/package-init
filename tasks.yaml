@@ -17,7 +17,7 @@ variables:
     default: "zarf-config.toml"
 
 tasks:
-  - name: pull-init-package
+  - name: pull
     description: "Pull Zarf init package from OCI registry"
     actions:
       - description: "Pull Zarf init package from OCI registry"
@@ -36,7 +36,7 @@ tasks:
         env:
           - ZARF_LOG_LEVEL=info
 
-  - name: deploy-init-dev
+  - name: deploy
     description: "Deploy Zarf Init package"
     actions:
       - description: "Deploy Zarf Inint with defined zarf-config.toml"
@@ -44,13 +44,7 @@ tasks:
           ZARF_CONFIG="$CONFIG_FILE" uds zarf package deploy zarf-init-*-${PACKAGE_VERSION}.tar.zst \
             --confirm
 
-  - name: init-dev-setup
-    description: "Complete K3d dev environment setup (pull + deploy)"
-    actions:
-      - task: pull-init-package
-      - task: deploy-init-dev
-
-  - name: clean-init-packages
+  - name: clean
     description: "Remove local Zarf package files"
     actions:
       - description: "Clean up local Zarf package files"
