@@ -4,7 +4,7 @@ Deploy the [zarf init](https://github.com/zarf-dev/zarf) package tailored to you
 
 ## UDS CLI & Maru
 
-Maru tasks are used to pull in the upstream K3D package via the `uds run` alias built into the UDS CLI tool defined in the tasks.yaml file. 
+Maru tasks are used to pull in the upstream K3D package via the `uds run` alias built into the UDS CLI tool defined in the tasks.yaml file.
 
 ## Variable Overrides via Config Files
 
