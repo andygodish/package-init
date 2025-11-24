@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-pod
+spec:
+  imagePullSecrets:
+    - name: registry-creds
+    - name: private-registry
+  containers:
+    - name: debug
+      image: 127.0.0.1:31999/ironbank/frontiertechnology/cortex/busybox:v1.37.0
+      command: ["sh"]
+      stdin: true
+      tty: true
+  restartPolicy: Never
