@@ -1,0 +1,8 @@
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: minio-debug
+  namespace: minio
+spec:
+  mtls:
+    mode: PERMISSIVE
