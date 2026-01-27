@@ -39,7 +39,7 @@ tasks:
   - name: deploy
     description: "Deploy Zarf Init package"
     actions:
-      - description: "Deploy Zarf Inint with defined zarf-config.toml"
+      - description: "Deploy Zarf Init with defined zarf-config.toml"
         cmd: |
           ZARF_CONFIG="$CONFIG_FILE" uds zarf package deploy zarf-init-*-${PACKAGE_VERSION}.tar.zst \
             --confirm
