@@ -8,7 +8,7 @@ variables:
     default: "init"
   - name: PACKAGE_VERSION
     description: "Version of the Zarf Init package"
-    default: "v0.70.1"
+    default: "v0.71.0"
   - name: ARCHITECTURE
     description: "System architecture (amd64 or arm64)"
     default: ""
